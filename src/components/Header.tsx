@@ -1,9 +1,22 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Shield, Search } from "lucide-react";
+import { Menu, X, Shield, Search, LogOut, User } from "lucide-react";
+import { useAuth } from "@/hooks/useAuth";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { user, signOut } = useAuth();
+  const navigate = useNavigate();
+
+  const handleAuthClick = () => {
+    navigate('/auth');
+  };
+
+  const handleSignOut = async () => {
+    await signOut();
+    navigate('/');
+  };
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 glass-card">
@@ -41,9 +54,21 @@ const Header = () => {
               <Search className="w-4 h-4 mr-2" />
               Find My ID
             </Button>
-            <Button variant="hero" size="sm">
-              Report Found ID
-            </Button>
+            {user ? (
+              <>
+                <Button variant="outline" size="sm" className="gap-2">
+                  <User className="w-4 h-4" />
+                  {user.email?.split('@')[0]}
+                </Button>
+                <Button variant="ghost" size="sm" onClick={handleSignOut}>
+                  <LogOut className="w-4 h-4" />
+                </Button>
+              </>
+            ) : (
+              <Button variant="hero" size="sm" onClick={handleAuthClick}>
+                Sign In
+              </Button>
+            )}
           </div>
 
           {/* Mobile Menu Button */}
@@ -77,9 +102,16 @@ const Header = () => {
                   <Search className="w-4 h-4 mr-2" />
                   Find My ID
                 </Button>
-                <Button variant="hero" className="w-full">
-                  Report Found ID
-                </Button>
+                {user ? (
+                  <Button variant="outline" className="w-full" onClick={handleSignOut}>
+                    <LogOut className="w-4 h-4 mr-2" />
+                    Sign Out
+                  </Button>
+                ) : (
+                  <Button variant="hero" className="w-full" onClick={handleAuthClick}>
+                    Sign In
+                  </Button>
+                )}
               </div>
             </nav>
           </div>
