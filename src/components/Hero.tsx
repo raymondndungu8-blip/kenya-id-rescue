@@ -1,7 +1,10 @@
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Search, Upload, Heart, ArrowRight, Shield, Users, Star } from "lucide-react";
 
 const Hero = () => {
+  const navigate = useNavigate();
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
       {/* Background Pattern */}
@@ -42,7 +45,7 @@ const Hero = () => {
               Search for My ID
               <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
             </Button>
-            <Button variant="glass" size="xl" className="w-full sm:w-auto">
+            <Button variant="glass" size="xl" className="w-full sm:w-auto" onClick={() => navigate("/report-found")}>
               <Upload className="w-5 h-5 mr-2" />
               I Found an ID
             </Button>
