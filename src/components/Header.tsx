@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X, Shield, Search, LogOut, User } from "lucide-react";
-import QRCodeModal from "@/components/QRCodeModal";
 import { useAuth } from "@/hooks/useAuth";
 
 const Header = () => {
@@ -51,7 +50,6 @@ const Header = () => {
 
           {/* Desktop Actions */}
           <div className="hidden md:flex items-center gap-3">
-            <QRCodeModal />
             <Button variant="ghost" size="sm">
               <Search className="w-4 h-4 mr-2" />
               Find My ID
