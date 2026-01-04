@@ -14,7 +14,57 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      found_ids: {
+        Row: {
+          contact_email: string | null
+          contact_phone: string | null
+          created_at: string
+          date_found: string
+          description: string | null
+          id: string
+          id_number: string | null
+          id_type: string
+          location_found: string
+          name_on_id: string | null
+          photo_url: string | null
+          reporter_id: string | null
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          contact_email?: string | null
+          contact_phone?: string | null
+          created_at?: string
+          date_found?: string
+          description?: string | null
+          id?: string
+          id_number?: string | null
+          id_type: string
+          location_found: string
+          name_on_id?: string | null
+          photo_url?: string | null
+          reporter_id?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          contact_email?: string | null
+          contact_phone?: string | null
+          created_at?: string
+          date_found?: string
+          description?: string | null
+          id?: string
+          id_number?: string | null
+          id_type?: string
+          location_found?: string
+          name_on_id?: string | null
+          photo_url?: string | null
+          reporter_id?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
