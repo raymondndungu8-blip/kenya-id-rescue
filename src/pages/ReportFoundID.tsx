@@ -94,7 +94,7 @@ const ReportFoundID = () => {
     setIsSubmitting(true);
 
     try {
-      let photoUrl = null;
+      let photoPath = null;
 
       if (photoFile) {
         const fileExt = photoFile.name.split(".").pop();
@@ -106,11 +106,8 @@ const ReportFoundID = () => {
 
         if (uploadError) throw uploadError;
 
-        const { data: urlData } = supabase.storage
-          .from("id-photos")
-          .getPublicUrl(fileName);
-
-        photoUrl = urlData.publicUrl;
+        // Store the file path, not a public URL (bucket is private)
+        photoPath = fileName;
       }
 
       const { error } = await supabase.from("found_ids").insert({
@@ -121,7 +118,7 @@ const ReportFoundID = () => {
         location_found: data.location_found,
         date_found: data.date_found,
         description: data.description || null,
-        photo_url: photoUrl,
+        photo_url: photoPath,
         contact_phone: data.contact_phone || null,
         contact_email: data.contact_email || null,
       });
