@@ -65,12 +65,93 @@ export type Database = {
         }
         Relationships: []
       }
+      search_logs: {
+        Row: {
+          created_at: string | null
+          id: string
+          search_params: Json | null
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          search_params?: Json | null
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          search_params?: Json | null
+          user_id?: string | null
+        }
+        Relationships: []
+      }
+      verification_requests: {
+        Row: {
+          created_at: string | null
+          expires_at: string | null
+          found_id_ref: string | null
+          id: string
+          reporter_response: string | null
+          requester_id: string
+          status: string | null
+          verification_answer: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          expires_at?: string | null
+          found_id_ref?: string | null
+          id?: string
+          reporter_response?: string | null
+          requester_id: string
+          status?: string | null
+          verification_answer?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          expires_at?: string | null
+          found_id_ref?: string | null
+          id?: string
+          reporter_response?: string | null
+          requester_id?: string
+          status?: string | null
+          verification_answer?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "verification_requests_found_id_ref_fkey"
+            columns: ["found_id_ref"]
+            isOneToOne: false
+            referencedRelation: "found_ids"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      request_id_details: {
+        Args: { found_id: string; verification_answer: string }
+        Returns: string
+      }
+      search_found_ids: {
+        Args: {
+          search_id_number?: string
+          search_id_type?: string
+          search_location?: string
+          search_name?: string
+        }
+        Returns: {
+          date_found: string
+          id: string
+          id_number_masked: string
+          id_type: string
+          location_found: string
+          name_on_id_masked: string
+        }[]
+      }
     }
     Enums: {
       [_ in never]: never
