@@ -29,6 +29,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { sanitizeError } from "@/lib/errorHandler";
+import { validateImageFile, getImageExtension } from "@/lib/imageValidator";
 
 // Enhanced validation schema with format validation and whitespace normalization
 const formSchema = z.object({
@@ -89,16 +90,25 @@ const ReportFoundID = () => {
     },
   });
 
-  const handlePhotoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handlePhotoChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (file) {
-      if (file.size > 5 * 1024 * 1024) {
-        toast.error("Photo must be less than 5MB");
-        return;
-      }
-      setPhotoFile(file);
-      setPhotoPreview(URL.createObjectURL(file));
+    if (!file) return;
+
+    // Validate file size
+    if (file.size > 5 * 1024 * 1024) {
+      toast.error("Photo must be less than 5MB");
+      return;
     }
+
+    // Validate file is a genuine image using magic bytes
+    const isValidImage = await validateImageFile(file);
+    if (!isValidImage) {
+      toast.error("Invalid image file. Please upload a valid JPEG, PNG, GIF, or WebP image.");
+      return;
+    }
+
+    setPhotoFile(file);
+    setPhotoPreview(URL.createObjectURL(file));
   };
 
   const onSubmit = async (data: FormData) => {
@@ -114,7 +124,8 @@ const ReportFoundID = () => {
       let photoPath = null;
 
       if (photoFile) {
-        const fileExt = photoFile.name.split(".").pop();
+        // Use standardized extension based on MIME type, not user-provided filename
+        const fileExt = getImageExtension(photoFile.type);
         const fileName = `${user.id}/${Date.now()}.${fileExt}`;
 
         const { error: uploadError } = await supabase.storage
