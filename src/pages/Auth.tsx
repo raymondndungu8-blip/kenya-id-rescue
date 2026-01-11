@@ -6,6 +6,7 @@ import { Label } from '@/components/ui/label';
 import { useAuth } from '@/hooks/useAuth';
 import { Shield, Mail, Lock, Eye, EyeOff } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { sanitizeError } from '@/lib/errorHandler';
 
 const Auth = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -34,15 +35,9 @@ const Auth = () => {
         : await signUpWithEmail(email, password);
 
       if (error) {
-        let message = error.message;
-        if (error.message.includes('Invalid login credentials')) {
-          message = 'Invalid email or password. Please try again.';
-        } else if (error.message.includes('User already registered')) {
-          message = 'This email is already registered. Please sign in instead.';
-        }
         toast({
           title: 'Error',
-          description: message,
+          description: sanitizeError(error),
           variant: 'destructive',
         });
       } else {
@@ -71,7 +66,7 @@ const Auth = () => {
     if (error) {
       toast({
         title: 'Error',
-        description: error.message,
+        description: sanitizeError(error),
         variant: 'destructive',
       });
     }
