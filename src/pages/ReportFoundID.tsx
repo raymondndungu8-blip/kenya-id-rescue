@@ -28,16 +28,33 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { sanitizeError } from "@/lib/errorHandler";
 
+// Enhanced validation schema with format validation and whitespace normalization
 const formSchema = z.object({
   id_type: z.string().min(1, "Please select an ID type"),
-  name_on_id: z.string().max(100).optional(),
-  id_number: z.string().max(50).optional(),
-  location_found: z.string().min(1, "Location is required").max(200),
+  name_on_id: z.string()
+    .trim()
+    .regex(/^[a-zA-Z\s\-.']*$/, "Name contains invalid characters")
+    .max(100)
+    .optional()
+    .or(z.literal("")),
+  id_number: z.string()
+    .trim()
+    .regex(/^[A-Za-z0-9\-*]*$/, "ID number must contain only letters, numbers, or dashes")
+    .max(50)
+    .optional()
+    .or(z.literal("")),
+  location_found: z.string().trim().min(1, "Location is required").max(200),
   date_found: z.string().min(1, "Date is required"),
-  description: z.string().max(500).optional(),
-  contact_phone: z.string().max(20).optional(),
-  contact_email: z.string().email().max(255).optional().or(z.literal("")),
+  description: z.string().trim().max(500).optional(),
+  contact_phone: z.string()
+    .trim()
+    .regex(/^(\+?[0-9\s\-()]{7,20})?$/, "Invalid phone number format")
+    .max(20)
+    .optional()
+    .or(z.literal("")),
+  contact_email: z.string().trim().email("Invalid email address").max(255).optional().or(z.literal("")),
 });
 
 type FormData = z.infer<typeof formSchema>;
@@ -127,9 +144,8 @@ const ReportFoundID = () => {
 
       toast.success("Found ID reported successfully! Thank you for helping.");
       navigate("/");
-    } catch (error: any) {
-      console.error("Error submitting report:", error);
-      toast.error(error.message || "Failed to submit report");
+    } catch (error: unknown) {
+      toast.error(sanitizeError(error));
     } finally {
       setIsSubmitting(false);
     }
