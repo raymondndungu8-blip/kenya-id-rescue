@@ -132,6 +132,7 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      escape_like_pattern: { Args: { input_text: string }; Returns: string }
       request_id_details: {
         Args: { found_id: string; verification_answer: string }
         Returns: string
