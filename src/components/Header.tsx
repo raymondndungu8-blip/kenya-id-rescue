@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Shield, Search, LogOut, User } from "lucide-react";
+import { Menu, X, Shield, Search, LogOut, User, LayoutDashboard } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 
 const Header = () => {
@@ -50,15 +50,15 @@ const Header = () => {
 
           {/* Desktop Actions */}
           <div className="hidden md:flex items-center gap-3">
-            <Button variant="ghost" size="sm">
+            <Button variant="ghost" size="sm" onClick={() => navigate('/search')}>
               <Search className="w-4 h-4 mr-2" />
               Find My ID
             </Button>
             {user ? (
               <>
-                <Button variant="outline" size="sm" className="gap-2">
-                  <User className="w-4 h-4" />
-                  {user.email?.split('@')[0]}
+                <Button variant="outline" size="sm" className="gap-2" onClick={() => navigate('/dashboard')}>
+                  <LayoutDashboard className="w-4 h-4" />
+                  Dashboard
                 </Button>
                 <Button variant="ghost" size="sm" onClick={handleSignOut}>
                   <LogOut className="w-4 h-4" />
@@ -98,15 +98,21 @@ const Header = () => {
                 Collection Points
               </a>
               <div className="flex flex-col gap-2 pt-4">
-                <Button variant="outline" className="w-full">
+                <Button variant="outline" className="w-full" onClick={() => navigate('/search')}>
                   <Search className="w-4 h-4 mr-2" />
                   Find My ID
                 </Button>
                 {user ? (
-                  <Button variant="outline" className="w-full" onClick={handleSignOut}>
-                    <LogOut className="w-4 h-4 mr-2" />
-                    Sign Out
-                  </Button>
+                  <>
+                    <Button variant="outline" className="w-full" onClick={() => navigate('/dashboard')}>
+                      <LayoutDashboard className="w-4 h-4 mr-2" />
+                      Dashboard
+                    </Button>
+                    <Button variant="ghost" className="w-full" onClick={handleSignOut}>
+                      <LogOut className="w-4 h-4 mr-2" />
+                      Sign Out
+                    </Button>
+                  </>
                 ) : (
                   <Button variant="hero" className="w-full" onClick={handleAuthClick}>
                     Sign In
