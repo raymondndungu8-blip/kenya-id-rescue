@@ -8,7 +8,7 @@ interface AuthContextType {
   loading: boolean;
   signInWithGoogle: () => Promise<{ error: Error | null }>;
   signInWithEmail: (email: string, password: string) => Promise<{ error: Error | null }>;
-  signUpWithEmail: (email: string, password: string) => Promise<{ error: Error | null }>;
+  signUpWithEmail: (email: string, password: string, fullName: string) => Promise<{ error: Error | null }>;
   signOut: () => Promise<void>;
 }
 
@@ -57,14 +57,29 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     return { error };
   };
 
-  const signUpWithEmail = async (email: string, password: string) => {
-    const { error } = await supabase.auth.signUp({
+  const signUpWithEmail = async (email: string, password: string, fullName: string) => {
+    const { data, error } = await supabase.auth.signUp({
       email,
       password,
       options: {
         emailRedirectTo: `${window.location.origin}/`,
       },
     });
+    
+    // If signup successful, create profile
+    if (!error && data.user) {
+      const { error: profileError } = await supabase
+        .from('profiles')
+        .insert({
+          user_id: data.user.id,
+          full_name: fullName,
+        });
+      
+      if (profileError) {
+        console.error('Error creating profile:', profileError);
+      }
+    }
+    
     return { error };
   };
 
