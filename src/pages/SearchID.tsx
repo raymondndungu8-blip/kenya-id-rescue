@@ -151,6 +151,19 @@ const SearchID = () => {
 
       if (error) throw error;
 
+      // Send email notification to the reporter (fire and forget)
+      const { data: sessionData } = await supabase.auth.getSession();
+      if (sessionData?.session?.access_token) {
+        fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/notify-verification-request`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${sessionData.session.access_token}`,
+          },
+          body: JSON.stringify({ found_id: selectedResult.id }),
+        }).catch((err) => console.error('Email notification error:', err));
+      }
+
       toast.success("Verification request submitted! The finder will review your request.");
       setIsRequestDialogOpen(false);
       setSelectedResult(null);
