@@ -71,7 +71,8 @@ const ID_TYPES = [
 
 const ReportFoundID = () => {
   const navigate = useNavigate();
-  const { user } = useAuth();
+  // Auth temporarily disabled for testing
+  // const { user } = useAuth();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [photoFile, setPhotoFile] = useState<File | null>(null);
   const [photoPreview, setPhotoPreview] = useState<string | null>(null);
@@ -112,11 +113,12 @@ const ReportFoundID = () => {
   };
 
   const onSubmit = async (data: FormData) => {
-    if (!user) {
-      toast.error("Please sign in to report a found ID");
-      navigate("/auth");
-      return;
-    }
+    // Auth check temporarily disabled for testing
+    // if (!user) {
+    //   toast.error("Please sign in to report a found ID");
+    //   navigate("/auth");
+    //   return;
+    // }
 
     setIsSubmitting(true);
 
@@ -126,7 +128,7 @@ const ReportFoundID = () => {
       if (photoFile) {
         // Use standardized extension based on MIME type, not user-provided filename
         const fileExt = getImageExtension(photoFile.type);
-        const fileName = `${user.id}/${Date.now()}.${fileExt}`;
+        const fileName = `test-user/${Date.now()}.${fileExt}`;
 
         const { error: uploadError } = await supabase.storage
           .from("id-photos")
@@ -139,7 +141,7 @@ const ReportFoundID = () => {
       }
 
       const { error } = await supabase.from("found_ids").insert({
-        reporter_id: user.id,
+        reporter_id: null, // Temporarily allow null for testing
         id_type: data.id_type,
         name_on_id: data.name_on_id || null,
         id_number: data.id_number || null,
@@ -162,25 +164,26 @@ const ReportFoundID = () => {
     }
   };
 
-  if (!user) {
-    return (
-      <div className="min-h-screen bg-background">
-        <Header />
-        <main className="pt-24 pb-16">
-          <div className="container mx-auto px-4 text-center">
-            <h1 className="text-3xl font-display font-bold mb-4">Sign In Required</h1>
-            <p className="text-muted-foreground mb-6">
-              Please sign in to report a found ID
-            </p>
-            <Button variant="hero" onClick={() => navigate("/auth")}>
-              Sign In
-            </Button>
-          </div>
-        </main>
-        <Footer />
-      </div>
-    );
-  }
+  // Auth gate temporarily disabled for testing
+  // if (!user) {
+  //   return (
+  //     <div className="min-h-screen bg-background">
+  //       <Header />
+  //       <main className="pt-24 pb-16">
+  //         <div className="container mx-auto px-4 text-center">
+  //           <h1 className="text-3xl font-display font-bold mb-4">Sign In Required</h1>
+  //           <p className="text-muted-foreground mb-6">
+  //             Please sign in to report a found ID
+  //           </p>
+  //           <Button variant="hero" onClick={() => navigate("/auth")}>
+  //             Sign In
+  //           </Button>
+  //         </div>
+  //       </main>
+  //       <Footer />
+  //     </div>
+  //   );
+  // }
 
   return (
     <div className="min-h-screen bg-background">

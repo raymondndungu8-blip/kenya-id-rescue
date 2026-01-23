@@ -62,7 +62,8 @@ interface VerificationRequest {
 
 const Dashboard = () => {
   const navigate = useNavigate();
-  const { user, loading: authLoading } = useAuth();
+  // Auth temporarily disabled for testing
+  // const { user, loading: authLoading } = useAuth();
   const [myReports, setMyReports] = useState<FoundID[]>([]);
   const [pendingRequests, setPendingRequests] = useState<VerificationRequest[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -72,23 +73,23 @@ const Dashboard = () => {
   const [dialogAction, setDialogAction] = useState<"approve" | "reject" | null>(null);
 
   useEffect(() => {
-    if (!authLoading && !user) {
-      navigate("/auth");
-      return;
-    }
-    if (user) {
-      fetchData();
-    }
-  }, [user, authLoading, navigate]);
+    // Auth gate temporarily disabled for testing
+    // if (!authLoading && !user) {
+    //   navigate("/auth");
+    //   return;
+    // }
+    // if (user) {
+    fetchData();
+    // }
+  }, [navigate]);
 
   const fetchData = async () => {
     setIsLoading(true);
     try {
-      // Fetch user's found ID reports
+      // Fetch all found ID reports (auth disabled for testing)
       const { data: reports, error: reportsError } = await supabase
         .from("found_ids")
         .select("*")
-        .eq("reporter_id", user?.id)
         .order("created_at", { ascending: false });
 
       if (reportsError) throw reportsError;
@@ -173,17 +174,18 @@ const Dashboard = () => {
     }
   };
 
-  if (authLoading) {
-    return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
-        <Loader2 className="w-8 h-8 animate-spin text-primary" />
-      </div>
-    );
-  }
+  // Auth loading check temporarily disabled for testing
+  // if (authLoading) {
+  //   return (
+  //     <div className="min-h-screen bg-background flex items-center justify-center">
+  //       <Loader2 className="w-8 h-8 animate-spin text-primary" />
+  //     </div>
+  //   );
+  // }
 
-  if (!user) {
-    return null;
-  }
+  // if (!user) {
+  //   return null;
+  // }
 
   return (
     <div className="min-h-screen bg-background">

@@ -74,7 +74,8 @@ const ID_TYPES = [
 
 const SearchID = () => {
   const navigate = useNavigate();
-  const { user } = useAuth();
+  // Auth temporarily disabled for testing
+  // const { user } = useAuth();
   const [isSearching, setIsSearching] = useState(false);
   const [results, setResults] = useState<SearchResult[]>([]);
   const [hasSearched, setHasSearched] = useState(false);
@@ -125,11 +126,12 @@ const SearchID = () => {
   };
 
   const handleRequestDetails = (result: SearchResult) => {
-    if (!user) {
-      toast.error("Please sign in to request ID details");
-      navigate("/auth");
-      return;
-    }
+    // Auth check temporarily disabled for testing
+    // if (!user) {
+    //   toast.error("Please sign in to request ID details");
+    //   navigate("/auth");
+    //   return;
+    // }
     setSelectedResult(result);
     setVerificationAnswer("");
     setIsRequestDialogOpen(true);
