@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Search, Upload, Heart, ArrowRight, Shield, Users, Star } from "lucide-react";
+import { Search, Upload, Heart, ArrowRight, Shield, Users } from "lucide-react";
 
 const Hero = () => {
   const navigate = useNavigate();
@@ -23,7 +23,7 @@ const Hero = () => {
           {/* Trust Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary/10 border border-secondary/20 mb-8 animate-slide-up">
             <Shield className="w-4 h-4 text-secondary" />
-            <span className="text-sm font-medium text-secondary">Trusted by 50,000+ Kenyans</span>
+            <span className="text-sm font-medium text-secondary">Kenya's ID Recovery Platform</span>
           </div>
 
           {/* Main Heading */}
@@ -51,28 +51,25 @@ const Hero = () => {
             </Button>
           </div>
 
-          {/* Stats Row */}
+          {/* Feature Highlights */}
           <div className="grid grid-cols-3 gap-4 md:gap-8 max-w-xl mx-auto animate-slide-up animation-delay-400">
             <div className="text-center">
               <div className="flex items-center justify-center gap-1 mb-1">
-                <Heart className="w-5 h-5 text-primary" />
-                <span className="font-display text-2xl md:text-3xl font-bold text-foreground">12K+</span>
+                <Shield className="w-5 h-5 text-primary" />
               </div>
-              <p className="text-xs md:text-sm text-muted-foreground">IDs Returned</p>
+              <p className="text-xs md:text-sm text-muted-foreground">Secure & Private</p>
             </div>
             <div className="text-center">
               <div className="flex items-center justify-center gap-1 mb-1">
                 <Users className="w-5 h-5 text-secondary" />
-                <span className="font-display text-2xl md:text-3xl font-bold text-foreground">50K+</span>
               </div>
-              <p className="text-xs md:text-sm text-muted-foreground">Community Members</p>
+              <p className="text-xs md:text-sm text-muted-foreground">Community Driven</p>
             </div>
             <div className="text-center">
               <div className="flex items-center justify-center gap-1 mb-1">
-                <Star className="w-5 h-5 text-accent" />
-                <span className="font-display text-2xl md:text-3xl font-bold text-foreground">4.9</span>
+                <Heart className="w-5 h-5 text-accent" />
               </div>
-              <p className="text-xs md:text-sm text-muted-foreground">Trust Rating</p>
+              <p className="text-xs md:text-sm text-muted-foreground">Free to Use</p>
             </div>
           </div>
         </div>
