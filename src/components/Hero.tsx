@@ -7,11 +7,34 @@ const Hero = () => {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 maasai-pattern opacity-30" />
+      {/* Kenyan Flag Background */}
+      <div className="absolute inset-0">
+        {/* Black stripe */}
+        <div className="absolute top-0 left-0 right-0 h-1/4 bg-kenyan-black" />
+        {/* Red stripe with white border */}
+        <div className="absolute top-1/4 left-0 right-0 h-[4%] bg-white" />
+        <div className="absolute top-[29%] left-0 right-0 h-[21%] bg-kenyan-red" />
+        <div className="absolute top-1/2 left-0 right-0 h-[4%] bg-white" />
+        {/* Green stripe */}
+        <div className="absolute top-[54%] left-0 right-0 h-[21%] bg-kenyan-green" />
+        <div className="absolute top-3/4 left-0 right-0 h-1/4 bg-kenyan-green" />
+      </div>
       
-      {/* Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-background/95 to-muted/50" />
+      {/* Maasai Shield Silhouette */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-5">
+        <div className="w-80 h-[32rem] md:w-96 md:h-[40rem] relative">
+          <div className="absolute inset-0 bg-foreground rounded-[50%] transform scale-x-75" />
+          <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-1/2 h-1/2 border-4 border-background/30 rounded-full" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-[140%] bg-foreground rotate-12" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-[140%] bg-foreground -rotate-12" />
+        </div>
+      </div>
+      
+      {/* Elegant overlay for readability */}
+      <div className="absolute inset-0 bg-background/90 backdrop-blur-sm" />
+      
+      {/* Maasai Pattern */}
+      <div className="absolute inset-0 maasai-pattern opacity-20" />
       
       {/* Floating Elements */}
       <div className="absolute top-32 left-10 w-20 h-20 rounded-full bg-primary/10 animate-float blur-xl" />
