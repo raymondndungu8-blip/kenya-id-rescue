@@ -50,7 +50,7 @@ const CTA = () => {
 
           <div className="mt-12 flex items-center justify-center gap-2 text-sm opacity-80">
             <Heart className="w-4 h-4" />
-            <span>Over 12,000 IDs returned with love</span>
+            <span>Helping Kenyans reunite with their IDs</span>
           </div>
         </div>
       </div>
