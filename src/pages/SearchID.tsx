@@ -4,11 +4,11 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { toast } from "sonner";
-import { Search, MapPin, Calendar, CreditCard, Loader2, Shield } from "lucide-react";
+import { Search, MapPin, Calendar, CreditCard, Loader2, Shield, Camera } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
-import { useAuth } from "@/hooks/useAuth";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import SelfieCapture from "@/components/SelfieCapture";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -74,8 +74,6 @@ const ID_TYPES = [
 
 const SearchID = () => {
   const navigate = useNavigate();
-  // Auth temporarily disabled for testing
-  // const { user } = useAuth();
   const [isSearching, setIsSearching] = useState(false);
   const [results, setResults] = useState<SearchResult[]>([]);
   const [hasSearched, setHasSearched] = useState(false);
@@ -83,6 +81,13 @@ const SearchID = () => {
   const [isRequestDialogOpen, setIsRequestDialogOpen] = useState(false);
   const [verificationAnswer, setVerificationAnswer] = useState("");
   const [isSubmittingRequest, setIsSubmittingRequest] = useState(false);
+  const [selfieBase64, setSelfieBase64] = useState<string | null>(null);
+  const [faceMatchResult, setFaceMatchResult] = useState<{
+    match_confidence: number;
+    match_level: string;
+    reasoning: string;
+  } | null>(null);
+  const [isMatchingFace, setIsMatchingFace] = useState(false);
 
   const form = useForm<SearchData>({
     resolver: zodResolver(searchSchema),
@@ -126,15 +131,61 @@ const SearchID = () => {
   };
 
   const handleRequestDetails = (result: SearchResult) => {
-    // Auth check temporarily disabled for testing
-    // if (!user) {
-    //   toast.error("Please sign in to request ID details");
-    //   navigate("/auth");
-    //   return;
-    // }
     setSelectedResult(result);
     setVerificationAnswer("");
+    setSelfieBase64(null);
+    setFaceMatchResult(null);
     setIsRequestDialogOpen(true);
+  };
+
+  const handleSelfieCaptured = async (base64: string) => {
+    if (!selectedResult) return;
+    setSelfieBase64(base64);
+    setIsMatchingFace(true);
+
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/match-face`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
+          },
+          body: JSON.stringify({
+            selfieBase64: base64,
+            foundIdId: selectedResult.id,
+          }),
+        }
+      );
+
+      if (!response.ok) {
+        const errData = await response.json().catch(() => ({}));
+        if (errData.match_possible === false) {
+          toast.info("No ID photo available for face matching. Please verify with credentials only.");
+          return;
+        }
+        throw new Error(errData.error || "Face matching failed");
+      }
+
+      const data = await response.json();
+      if (data.success && data.result) {
+        setFaceMatchResult(data.result);
+
+        if (data.result.match_level === "high") {
+          toast.success(`Face match confidence: ${data.result.match_confidence}%! High match detected.`);
+        } else if (data.result.match_level === "medium") {
+          toast.info(`Face match confidence: ${data.result.match_confidence}%. Please also provide credentials.`);
+        } else {
+          toast.warning(`Low face match (${data.result.match_confidence}%). Please provide your credentials for verification.`);
+        }
+      }
+    } catch (error: unknown) {
+      console.error("Face match error:", error);
+      toast.error(error instanceof Error ? error.message : "Face matching failed. You can still verify with credentials.");
+    } finally {
+      setIsMatchingFace(false);
+    }
   };
 
   const submitVerificationRequest = async () => {
@@ -376,23 +427,54 @@ const SearchID = () => {
 
       {/* Verification Request Dialog */}
       <Dialog open={isRequestDialogOpen} onOpenChange={setIsRequestDialogOpen}>
-        <DialogContent>
+        <DialogContent className="max-w-lg max-h-[90vh] overflow-y-auto">
           <DialogHeader>
-            <DialogTitle>Request ID Details</DialogTitle>
+            <DialogTitle className="flex items-center gap-2">
+              <Camera className="w-5 h-5 text-primary" />
+              Verify Your Identity
+            </DialogTitle>
             <DialogDescription>
-              To verify you're the rightful owner, please provide additional information 
-              that only the owner would know.
+              Take a selfie for AI face matching and provide your credentials to verify ownership.
             </DialogDescription>
           </DialogHeader>
           
-          <div className="space-y-4">
-            <div>
-              <label className="text-sm font-medium">
-                Verification Information
-              </label>
-              <p className="text-xs text-muted-foreground mb-2">
-                Provide details like your full name, complete ID number, date of birth, 
-                or other identifying information that appears on your ID.
+          <div className="space-y-5">
+            {/* Step 1: Selfie Face Match */}
+            <div className="space-y-2">
+              <h4 className="text-sm font-semibold flex items-center gap-2">
+                <span className="w-6 h-6 rounded-full bg-primary text-primary-foreground text-xs flex items-center justify-center">1</span>
+                Face Verification (AI Scan)
+              </h4>
+              <SelfieCapture
+                onSelfieCaptured={handleSelfieCaptured}
+                isProcessing={isMatchingFace}
+              />
+
+              {/* Face match result */}
+              {faceMatchResult && (
+                <div className={`p-3 rounded-lg text-sm border ${
+                  faceMatchResult.match_level === "high"
+                    ? "bg-secondary/10 border-secondary/30 text-secondary"
+                    : faceMatchResult.match_level === "medium"
+                    ? "bg-accent/10 border-accent/30 text-accent-foreground"
+                    : "bg-destructive/10 border-destructive/30 text-destructive"
+                }`}>
+                  <p className="font-medium">
+                    Face Match: {faceMatchResult.match_confidence}% ({faceMatchResult.match_level})
+                  </p>
+                  <p className="text-xs mt-1 opacity-80">{faceMatchResult.reasoning}</p>
+                </div>
+              )}
+            </div>
+
+            {/* Step 2: Credentials */}
+            <div className="space-y-2">
+              <h4 className="text-sm font-semibold flex items-center gap-2">
+                <span className="w-6 h-6 rounded-full bg-primary text-primary-foreground text-xs flex items-center justify-center">2</span>
+                Provide Your Credentials
+              </h4>
+              <p className="text-xs text-muted-foreground">
+                Enter your full name, complete ID number, date of birth, or other identifying information.
               </p>
               <Input
                 placeholder="Enter your full name and ID number..."
@@ -404,9 +486,9 @@ const SearchID = () => {
             <div className="bg-muted/50 p-3 rounded-lg text-sm">
               <p className="font-medium">What happens next?</p>
               <ul className="list-disc list-inside text-muted-foreground mt-1 space-y-1">
-                <li>The finder will review your request</li>
-                <li>If approved, you'll get access to full details</li>
-                <li>Contact information will be shared for pickup</li>
+                <li>AI face match results are included with your request</li>
+                <li>The finder will review your request and credentials</li>
+                <li>If approved, you'll get access to full details for pickup</li>
               </ul>
             </div>
 
@@ -420,7 +502,7 @@ const SearchID = () => {
               <Button 
                 variant="hero"
                 onClick={submitVerificationRequest}
-                disabled={isSubmittingRequest || !verificationAnswer.trim()}
+                disabled={isSubmittingRequest || !verificationAnswer.trim() || isMatchingFace}
               >
                 {isSubmittingRequest ? (
                   <>
