@@ -16,6 +16,7 @@ export type Database = {
     Tables: {
       found_ids: {
         Row: {
+          ai_extracted_data: Json | null
           contact_email: string | null
           contact_phone: string | null
           created_at: string
@@ -26,12 +27,15 @@ export type Database = {
           id_type: string
           location_found: string
           name_on_id: string | null
+          photo_back_url: string | null
+          photo_front_url: string | null
           photo_url: string | null
           reporter_id: string | null
           status: string
           updated_at: string
         }
         Insert: {
+          ai_extracted_data?: Json | null
           contact_email?: string | null
           contact_phone?: string | null
           created_at?: string
@@ -42,12 +46,15 @@ export type Database = {
           id_type: string
           location_found: string
           name_on_id?: string | null
+          photo_back_url?: string | null
+          photo_front_url?: string | null
           photo_url?: string | null
           reporter_id?: string | null
           status?: string
           updated_at?: string
         }
         Update: {
+          ai_extracted_data?: Json | null
           contact_email?: string | null
           contact_phone?: string | null
           created_at?: string
@@ -58,6 +65,8 @@ export type Database = {
           id_type?: string
           location_found?: string
           name_on_id?: string | null
+          photo_back_url?: string | null
+          photo_front_url?: string | null
           photo_url?: string | null
           reporter_id?: string | null
           status?: string
