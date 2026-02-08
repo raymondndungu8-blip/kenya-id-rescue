@@ -209,7 +209,12 @@ const ReportFoundID = () => {
       toast.success("Found ID reported successfully! Thank you for helping.");
       navigate("/");
     } catch (error: unknown) {
-      toast.error(sanitizeError(error));
+      console.error("Submit error details:", error);
+      const message = error instanceof Error ? error.message : 
+        typeof error === 'object' && error !== null && 'message' in error 
+          ? String((error as { message: unknown }).message) 
+          : sanitizeError(error);
+      toast.error(message || "Failed to submit report. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
