@@ -24,6 +24,9 @@ const IDPhotoUpload = ({
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handlePhotoChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
     const file = e.target.files?.[0];
     if (!file) return;
 
@@ -40,6 +43,11 @@ const IDPhotoUpload = ({
 
     const preview = URL.createObjectURL(file);
     onPhotoSelected(file, preview);
+    
+    // Reset input to allow re-selecting the same file
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+    }
   };
 
   const label = side === "front" ? "Front of ID" : "Back of ID";
@@ -101,7 +109,6 @@ const IDPhotoUpload = ({
               ref={fileInputRef}
               type="file"
               accept="image/*"
-              capture="environment"
               className="hidden"
               onChange={handlePhotoChange}
             />
