@@ -99,20 +99,28 @@ const IDPhotoUpload = ({
             </Button>
           </div>
         ) : (
-          <label className="cursor-pointer block">
+          <div
+            className="cursor-pointer"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              fileInputRef.current?.click();
+            }}
+          >
             <div className="space-y-2 py-2">
               <Camera className="w-7 h-7 mx-auto text-muted-foreground" />
               <p className="text-sm text-muted-foreground">{description}</p>
-              <p className="text-xs text-muted-foreground/70">Tap to open camera • Max 5MB</p>
+              <p className="text-xs text-muted-foreground/70">Tap to scan with camera • Max 5MB</p>
             </div>
             <input
               ref={fileInputRef}
               type="file"
               accept="image/*"
+              capture="environment"
               className="hidden"
               onChange={handlePhotoChange}
             />
-          </label>
+          </div>
         )}
       </div>
     </div>
