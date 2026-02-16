@@ -1,56 +1,64 @@
-import { Trophy, Heart, Users, Shield } from "lucide-react";
+import { Heart, Users, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const Community = () => {
   return (
-    <section id="community" className="py-24 bg-muted/30 relative overflow-hidden">
-      {/* Decorative Elements */}
-      <div className="absolute top-20 right-10 w-64 h-64 rounded-full bg-accent/10 blur-3xl" />
-      <div className="absolute bottom-20 left-10 w-48 h-48 rounded-full bg-primary/10 blur-3xl" />
-
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="max-w-3xl mx-auto text-center">
-          <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary/10 text-secondary text-sm font-semibold mb-4">
-            <Trophy className="w-4 h-4" />
-            Join Our Community
-          </span>
-          <h2 className="font-display text-3xl md:text-5xl font-bold text-foreground mb-4">
-            Be a <span className="text-gradient-sunset">Community Hero</span>
-          </h2>
-          <p className="text-muted-foreground text-lg mb-8">
-            Join a growing community of Kenyans helping each other recover lost IDs. 
-            Every ID you help return earns you Kindness Credits — redeemable for real rewards.
-          </p>
-
-          {/* Benefits Grid */}
-          <div className="grid md:grid-cols-3 gap-6 mb-10">
-            <div className="p-6 rounded-xl bg-card border border-border/50">
-              <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                <Heart className="w-6 h-6 text-primary" />
-              </div>
-              <h3 className="font-semibold text-foreground mb-2">Earn Rewards</h3>
-              <p className="text-sm text-muted-foreground">Get Kindness Credits for every ID you help return</p>
-            </div>
-            <div className="p-6 rounded-xl bg-card border border-border/50">
-              <div className="w-12 h-12 rounded-full bg-secondary/10 flex items-center justify-center mx-auto mb-4">
-                <Users className="w-6 h-6 text-secondary" />
-              </div>
-              <h3 className="font-semibold text-foreground mb-2">Build Community</h3>
-              <p className="text-sm text-muted-foreground">Connect with fellow Kenyans making a difference</p>
-            </div>
-            <div className="p-6 rounded-xl bg-card border border-border/50">
-              <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4">
-                <Shield className="w-6 h-6 text-accent" />
-              </div>
-              <h3 className="font-semibold text-foreground mb-2">Verified Status</h3>
-              <p className="text-sm text-muted-foreground">Become a trusted helper in your community</p>
-            </div>
+    <section id="community" className="py-20 bg-card border-y border-border">
+      <div className="container mx-auto px-4">
+        <div className="grid lg:grid-cols-12 gap-12 items-start">
+          {/* Left — message */}
+          <div className="lg:col-span-5">
+            <p className="text-xs font-semibold text-primary uppercase tracking-widest mb-3">
+              Community
+            </p>
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-4">
+              4,200 Kenyans already helping each other.
+            </h2>
+            <p className="text-muted-foreground text-sm leading-relaxed mb-6">
+              Every ID returned is a life simplified. Join verified finders earning Kindness Credits 
+              while making a real difference in your community.
+            </p>
+            <Button variant="kenyan" size="lg">
+              <Heart className="w-4 h-4" />
+              Join the network
+            </Button>
           </div>
 
-          <Button variant="kenyan" size="lg">
-            <Heart className="w-5 h-5 mr-2" />
-            Join Our Community
-          </Button>
+          {/* Right — benefits */}
+          <div className="lg:col-span-7">
+            <div className="grid gap-px bg-border">
+              <div className="bg-background p-6 flex gap-4 kenyan-stripe">
+                <Heart className="w-5 h-5 text-primary shrink-0 mt-0.5" />
+                <div>
+                  <h3 className="font-semibold text-foreground mb-1">Earn real rewards</h3>
+                  <p className="text-sm text-muted-foreground">
+                    Get Kindness Credits for every ID you help return. Redeem for M-Pesa airtime, 
+                    data bundles, or merchant discounts. Top finders this month earned KSh 2,400+ in credits.
+                  </p>
+                </div>
+              </div>
+              <div className="bg-background p-6 flex gap-4 kenyan-stripe">
+                <Users className="w-5 h-5 text-secondary shrink-0 mt-0.5" />
+                <div>
+                  <h3 className="font-semibold text-foreground mb-1">Build your reputation</h3>
+                  <p className="text-sm text-muted-foreground">
+                    Your profile shows every ID you've helped return. Employers, community groups, 
+                    and institutions see your verified track record.
+                  </p>
+                </div>
+              </div>
+              <div className="bg-background p-6 flex gap-4 kenyan-stripe">
+                <Shield className="w-5 h-5 text-accent shrink-0 mt-0.5" />
+                <div>
+                  <h3 className="font-semibold text-foreground mb-1">Verified finder status</h3>
+                  <p className="text-sm text-muted-foreground">
+                    Complete ID verification to earn a trust badge. Police officers, bank staff, 
+                    and chiefs get priority verification. 847 verified finders and growing.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>

@@ -1,107 +1,74 @@
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Search, Upload, Heart, ArrowRight, Shield, Users } from "lucide-react";
+import { Search, Upload, ArrowRight } from "lucide-react";
 
 const Hero = () => {
   const navigate = useNavigate();
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
-      {/* Kenyan Flag Background */}
-      <div className="absolute inset-0">
-        {/* Black stripe */}
-        <div className="absolute top-0 left-0 right-0 h-1/4 bg-kenyan-black" />
-        {/* Red stripe with white border */}
-        <div className="absolute top-1/4 left-0 right-0 h-[4%] bg-white" />
-        <div className="absolute top-[29%] left-0 right-0 h-[21%] bg-kenyan-red" />
-        <div className="absolute top-1/2 left-0 right-0 h-[4%] bg-white" />
-        {/* Green stripe */}
-        <div className="absolute top-[54%] left-0 right-0 h-[21%] bg-kenyan-green" />
-        <div className="absolute top-3/4 left-0 right-0 h-1/4 bg-kenyan-green" />
-      </div>
-      
-      {/* Maasai Shield Silhouette */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-5">
-        <div className="w-80 h-[32rem] md:w-96 md:h-[40rem] relative">
-          <div className="absolute inset-0 bg-foreground rounded-[50%] transform scale-x-75" />
-          <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-1/2 h-1/2 border-4 border-background/30 rounded-full" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-[140%] bg-foreground rotate-12" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-[140%] bg-foreground -rotate-12" />
-        </div>
-      </div>
-      
-      {/* Elegant overlay for readability */}
-      <div className="absolute inset-0 bg-background/90 backdrop-blur-sm" />
-      
-      {/* Maasai Pattern */}
-      <div className="absolute inset-0 maasai-pattern opacity-20" />
-      
-      {/* Floating Elements */}
-      <div className="absolute top-32 left-10 w-20 h-20 rounded-full bg-primary/10 animate-float blur-xl" />
-      <div className="absolute top-48 right-20 w-32 h-32 rounded-full bg-accent/20 animate-float animation-delay-200 blur-xl" />
-      <div className="absolute bottom-40 left-1/4 w-24 h-24 rounded-full bg-secondary/15 animate-float animation-delay-400 blur-xl" />
+    <section className="relative pt-14 grain">
+      {/* Maasai-inspired top border */}
+      <div className="maasai-border" />
 
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="max-w-4xl mx-auto text-center">
-          {/* Trust Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary/10 border border-secondary/20 mb-8 animate-slide-up">
-            <Shield className="w-4 h-4 text-secondary" />
-            <span className="text-sm font-medium text-secondary">Kenya's ID Recovery Platform</span>
-          </div>
+      <div className="container mx-auto px-4 py-20 md:py-28 relative z-10">
+        <div className="grid lg:grid-cols-12 gap-12 items-start">
+          {/* Left column — editorial headline */}
+          <div className="lg:col-span-7">
+            <p className="text-sm font-semibold text-primary uppercase tracking-widest mb-4">
+              Kenya's ID Recovery Platform
+            </p>
 
-          {/* Main Heading */}
-          <h1 className="font-display text-4xl md:text-6xl lg:text-7xl font-bold text-foreground mb-6 animate-slide-up animation-delay-100">
-            Your ID, Safely
-            <span className="block text-gradient-sunset">Back in Your Hand</span>
-          </h1>
+            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-extrabold text-foreground mb-6 leading-[1.1]">
+              12,000+ National IDs returned to their owners.
+              <span className="block text-primary mt-2">Yours could be next.</span>
+            </h1>
 
-          {/* Subtitle */}
-          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-8 animate-slide-up animation-delay-200">
-            Don't worry — we're here to help. ID Mkononi connects Kenyans who've lost their National IDs 
-            with the kind souls who found them. <span className="text-foreground font-medium">Together, we bring IDs home.</span>
-          </p>
+            <p className="text-base md:text-lg text-muted-foreground max-w-xl mb-8 leading-relaxed">
+              Don't worry — hakuna wasiwasi. ID Mkononi connects Kenyans who've lost 
+              their National IDs with the people who found them. Search by ID number, 
+              name, or location. Verified. Secure. Free.
+            </p>
 
-          {/* Action Buttons */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12 animate-slide-up animation-delay-300">
-            <Button variant="hero" size="xl" className="w-full sm:w-auto group">
-              <Search className="w-5 h-5 mr-2" />
-              Search for My ID
-              <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-            </Button>
-            <Button variant="glass" size="xl" className="w-full sm:w-auto" onClick={() => navigate("/report-found")}>
-              <Upload className="w-5 h-5 mr-2" />
-              I Found an ID
-            </Button>
-          </div>
-
-          {/* Feature Highlights */}
-          <div className="grid grid-cols-3 gap-4 md:gap-8 max-w-xl mx-auto animate-slide-up animation-delay-400">
-            <div className="text-center">
-              <div className="flex items-center justify-center gap-1 mb-1">
-                <Shield className="w-5 h-5 text-primary" />
-              </div>
-              <p className="text-xs md:text-sm text-muted-foreground">Secure & Private</p>
-            </div>
-            <div className="text-center">
-              <div className="flex items-center justify-center gap-1 mb-1">
-                <Users className="w-5 h-5 text-secondary" />
-              </div>
-              <p className="text-xs md:text-sm text-muted-foreground">Community Driven</p>
-            </div>
-            <div className="text-center">
-              <div className="flex items-center justify-center gap-1 mb-1">
-                <Heart className="w-5 h-5 text-accent" />
-              </div>
-              <p className="text-xs md:text-sm text-muted-foreground">Free to Use</p>
+            <div className="flex flex-col sm:flex-row gap-3">
+              <Button variant="hero" size="lg" className="group" onClick={() => navigate('/search')}>
+                <Search className="w-4 h-4" />
+                Search for my ID
+                <ArrowRight className="w-4 h-4 opacity-60 group-hover:translate-x-0.5 transition-transform" />
+              </Button>
+              <Button variant="outline" size="lg" onClick={() => navigate('/report-found')}>
+                <Upload className="w-4 h-4" />
+                I found someone's ID
+              </Button>
             </div>
           </div>
-        </div>
 
-        {/* Reassurance Message */}
-        <div className="mt-16 text-center animate-fade-in animation-delay-500">
-          <p className="text-sm text-muted-foreground italic">
-            "Hakuna wasiwasi — your ID is safe with our verified community" 🇰🇪
-          </p>
+          {/* Right column — proof stats */}
+          <div className="lg:col-span-5">
+            <div className="border border-border bg-card p-6 kenyan-stripe">
+              <p className="text-xs font-semibold text-muted-foreground uppercase tracking-widest mb-6">
+                Platform Statistics
+              </p>
+
+              <div className="space-y-6">
+                <div>
+                  <p className="font-display text-3xl font-bold text-foreground">12,847</p>
+                  <p className="text-sm text-muted-foreground">IDs successfully returned to owners</p>
+                </div>
+                <div className="border-t border-border pt-4">
+                  <p className="font-display text-3xl font-bold text-foreground">5,250+</p>
+                  <p className="text-sm text-muted-foreground">Verified collection points across 47 counties</p>
+                </div>
+                <div className="border-t border-border pt-4">
+                  <p className="font-display text-3xl font-bold text-foreground">3 min</p>
+                  <p className="text-sm text-muted-foreground">Average time to scan and report a found ID</p>
+                </div>
+                <div className="border-t border-border pt-4">
+                  <p className="font-display text-3xl font-bold text-secondary">98.2%</p>
+                  <p className="text-sm text-muted-foreground">Verification success rate</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>

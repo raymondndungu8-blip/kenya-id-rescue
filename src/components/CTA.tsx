@@ -1,79 +1,63 @@
 import { Button } from "@/components/ui/button";
-import { Search, Upload, Heart, ArrowRight } from "lucide-react";
+import { Search, Upload, ArrowRight } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const CTA = () => {
+  const navigate = useNavigate();
+
   return (
-    <section className="py-24 relative overflow-hidden">
-      {/* Kenyan Flag Background */}
-      <div className="absolute inset-0">
-        {/* Black stripe */}
-        <div className="absolute top-0 left-0 right-0 h-1/4 bg-kenyan-black" />
-        {/* Red stripe with white border */}
-        <div className="absolute top-1/4 left-0 right-0 h-[4%] bg-white/80" />
-        <div className="absolute top-[29%] left-0 right-0 h-[21%] bg-kenyan-red" />
-        <div className="absolute top-1/2 left-0 right-0 h-[4%] bg-white/80" />
-        {/* Green stripe */}
-        <div className="absolute top-[54%] left-0 right-0 h-[21%] bg-kenyan-green" />
-        <div className="absolute top-3/4 left-0 right-0 h-1/4 bg-kenyan-green" />
-      </div>
-      
-      {/* Maasai Shield Silhouette */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-10">
-        <div className="w-48 h-72 md:w-64 md:h-96 relative">
-          <div className="absolute inset-0 bg-white rounded-[50%] transform scale-x-75" />
-          <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-1/2 h-1/2 border-4 border-white/30 rounded-full" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-[140%] bg-white rotate-12" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-[140%] bg-white -rotate-12" />
-        </div>
-      </div>
-      
-      {/* Elegant overlay for readability */}
-      <div className="absolute inset-0 bg-gradient-hero opacity-85" />
-      
-      {/* Pattern Overlay */}
-      <div className="absolute inset-0 maasai-pattern opacity-10" />
-      
-      {/* Decorative Circles */}
-      <div className="absolute top-10 left-10 w-40 h-40 rounded-full bg-primary-foreground/10 blur-2xl" />
-      <div className="absolute bottom-10 right-10 w-60 h-60 rounded-full bg-accent/20 blur-3xl" />
-
+    <section className="py-20 bg-foreground text-background grain">
       <div className="container mx-auto px-4 relative z-10">
-        <div className="max-w-3xl mx-auto text-center text-primary-foreground">
-          {/* Emoji/Icon */}
-          <div className="text-6xl mb-6">🇰🇪</div>
-
-          <h2 className="font-display text-3xl md:text-5xl font-bold mb-4">
-            Ready to Help or Get Help?
-          </h2>
-          
-          <p className="text-lg md:text-xl opacity-90 mb-8 max-w-2xl mx-auto">
-            Whether you've lost your ID or found someone else's, you're in the right place. 
-            <span className="font-semibold"> Pamoja, tunaweza!</span> (Together, we can!)
-          </p>
-
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Button 
-              variant="glass" 
-              size="xl" 
-              className="w-full sm:w-auto bg-primary-foreground/20 text-primary-foreground border-primary-foreground/30 hover:bg-primary-foreground/30"
-            >
-              <Search className="w-5 h-5 mr-2" />
-              Find My ID
-              <ArrowRight className="w-5 h-5 ml-2" />
-            </Button>
-            <Button 
-              variant="accent" 
-              size="xl" 
-              className="w-full sm:w-auto"
-            >
-              <Upload className="w-5 h-5 mr-2" />
-              Report Found ID
-            </Button>
+        <div className="grid lg:grid-cols-12 gap-12 items-center">
+          <div className="lg:col-span-7">
+            <h2 className="font-display text-3xl md:text-4xl font-bold mb-4 text-background">
+              Ready to find your ID — or help someone find theirs?
+            </h2>
+            <p className="text-background/70 text-sm leading-relaxed max-w-lg mb-6">
+              Whether you've lost your National ID or found someone else's, you're in the right place. 
+              Pamoja, tunaweza — together, we can.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-3">
+              <Button 
+                size="lg" 
+                className="bg-primary text-primary-foreground hover:bg-primary/90 group"
+                onClick={() => navigate('/search')}
+              >
+                <Search className="w-4 h-4" />
+                Find my ID
+                <ArrowRight className="w-4 h-4 opacity-60 group-hover:translate-x-0.5 transition-transform" />
+              </Button>
+              <Button 
+                size="lg"
+                variant="outline"
+                className="border-background/30 text-background hover:bg-background/10 hover:text-background"
+                onClick={() => navigate('/report-found')}
+              >
+                <Upload className="w-4 h-4" />
+                Report found ID
+              </Button>
+            </div>
           </div>
 
-          <div className="mt-12 flex items-center justify-center gap-2 text-sm opacity-80">
-            <Heart className="w-4 h-4" />
-            <span>Helping Kenyans reunite with their IDs</span>
+          <div className="lg:col-span-5">
+            <div className="border border-background/15 p-6">
+              <p className="text-xs font-semibold text-background/50 uppercase tracking-widest mb-4">
+                Why it matters
+              </p>
+              <div className="space-y-4 text-sm text-background/70">
+                <p>
+                  <span className="text-background font-semibold">Without a National ID,</span> Kenyans 
+                  can't access banking, healthcare, voting, or employment. A lost ID means a lost livelihood.
+                </p>
+                <p>
+                  Government replacement takes <span className="text-background font-semibold">3–6 months</span> and 
+                  costs KSh 1,000+. ID Mkononi averages <span className="text-primary font-semibold">4 days</span>.
+                </p>
+                <p className="text-background/40 text-xs">
+                  🇰🇪 Helping Kenyans reunite with their IDs since 2024
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
