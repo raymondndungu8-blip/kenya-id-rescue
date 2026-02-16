@@ -2,66 +2,60 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700;8..60,800&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap');
 
 @layer base {
   :root {
-    /* Kenyan Sunset Palette */
-    --background: 30 20% 97%;
-    --foreground: 20 25% 10%;
+    /* Off-black & warm neutrals — NOT pure black or white */
+    --background: 30 12% 96%;
+    --foreground: 160 20% 8%;
 
-    --card: 30 25% 99%;
-    --card-foreground: 20 25% 10%;
+    --card: 30 10% 98%;
+    --card-foreground: 160 20% 8%;
 
-    --popover: 30 25% 99%;
-    --popover-foreground: 20 25% 10%;
+    --popover: 30 10% 98%;
+    --popover-foreground: 160 20% 8%;
 
-    /* Warm Terracotta Primary */
-    --primary: 18 85% 52%;
+    /* Warm Terracotta Primary — deepened for WCAG AAA */
+    --primary: 14 72% 42%;
     --primary-foreground: 0 0% 100%;
 
     /* Deep Forest Green Secondary */
-    --secondary: 145 45% 25%;
+    --secondary: 152 50% 18%;
     --secondary-foreground: 0 0% 100%;
 
     /* Warm Sand Muted */
-    --muted: 35 30% 92%;
-    --muted-foreground: 20 15% 45%;
+    --muted: 32 18% 90%;
+    --muted-foreground: 25 12% 42%;
 
-    /* Golden Accent */
-    --accent: 42 95% 55%;
-    --accent-foreground: 20 25% 10%;
+    /* Burnished Gold Accent */
+    --accent: 38 80% 48%;
+    --accent-foreground: 160 20% 8%;
 
-    /* Kenyan Flag Red */
-    --destructive: 0 75% 50%;
+    /* Kenyan Red — deepened */
+    --destructive: 0 68% 42%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 30 20% 88%;
-    --input: 30 20% 88%;
-    --ring: 18 85% 52%;
+    --border: 30 12% 85%;
+    --input: 30 12% 85%;
+    --ring: 14 72% 42%;
 
-    --radius: 1rem;
+    --radius: 0.25rem;
 
-    /* Custom Colors */
-    --kenyan-black: 0 0% 8%;
-    --kenyan-red: 0 75% 45%;
-    --kenyan-green: 145 55% 30%;
-    --kenyan-gold: 42 95% 55%;
-    --sunset-orange: 18 85% 52%;
-    --sunset-amber: 32 90% 58%;
-    --savannah-sand: 38 40% 85%;
-    --acacia-brown: 25 45% 25%;
+    /* Kenyan heritage tokens */
+    --kenyan-black: 160 20% 8%;
+    --kenyan-red: 0 68% 42%;
+    --kenyan-green: 152 50% 18%;
+    --kenyan-gold: 38 80% 48%;
+    --sunset-orange: 14 72% 42%;
+    --sunset-amber: 28 75% 50%;
+    --savannah-sand: 35 30% 82%;
+    --acacia-brown: 22 40% 22%;
 
-    /* Gradients */
-    --gradient-sunset: linear-gradient(135deg, hsl(18, 85%, 52%) 0%, hsl(0, 75%, 45%) 50%, hsl(42, 95%, 55%) 100%);
-    --gradient-savannah: linear-gradient(180deg, hsl(38, 40%, 95%) 0%, hsl(30, 25%, 90%) 100%);
-    --gradient-hero: linear-gradient(135deg, hsl(18, 85%, 52%) 0%, hsl(32, 90%, 58%) 100%);
-    --gradient-glass: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.7) 100%);
-
-    /* Shadows */
-    --shadow-soft: 0 4px 20px -4px hsl(18 85% 52% / 0.15);
-    --shadow-glow: 0 0 40px hsl(42 95% 55% / 0.3);
-    --shadow-card: 0 8px 32px -8px hsl(20 25% 10% / 0.1);
+    /* Functional shadows — no glows */
+    --shadow-sm: 0 1px 2px 0 hsl(160 20% 8% / 0.05);
+    --shadow-md: 0 2px 8px -2px hsl(160 20% 8% / 0.08);
+    --shadow-lg: 0 4px 16px -4px hsl(160 20% 8% / 0.1);
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -74,33 +68,33 @@
   }
 
   .dark {
-    --background: 20 25% 8%;
-    --foreground: 30 20% 95%;
+    --background: 160 18% 6%;
+    --foreground: 30 12% 92%;
 
-    --card: 20 25% 12%;
-    --card-foreground: 30 20% 95%;
+    --card: 160 16% 10%;
+    --card-foreground: 30 12% 92%;
 
-    --popover: 20 25% 12%;
-    --popover-foreground: 30 20% 95%;
+    --popover: 160 16% 10%;
+    --popover-foreground: 30 12% 92%;
 
-    --primary: 18 85% 55%;
+    --primary: 14 72% 52%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 145 45% 35%;
+    --secondary: 152 45% 30%;
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 20 20% 18%;
-    --muted-foreground: 30 15% 65%;
+    --muted: 160 12% 16%;
+    --muted-foreground: 30 10% 60%;
 
-    --accent: 42 95% 55%;
-    --accent-foreground: 20 25% 10%;
+    --accent: 38 80% 52%;
+    --accent-foreground: 160 20% 8%;
 
-    --destructive: 0 75% 55%;
+    --destructive: 0 68% 50%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 20 20% 20%;
-    --input: 20 20% 20%;
-    --ring: 18 85% 55%;
+    --border: 160 12% 18%;
+    --input: 160 12% 18%;
+    --ring: 14 72% 52%;
 
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
@@ -119,109 +113,78 @@
   }
 
   body {
-    @apply bg-background text-foreground font-sans antialiased;
-    font-family: 'Plus Jakarta Sans', sans-serif;
+    @apply bg-background text-foreground antialiased;
+    font-family: 'IBM Plex Sans', system-ui, sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
   }
 
   h1, h2, h3, h4 {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Source Serif 4', Georgia, serif;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
   }
 }
 
 @layer utilities {
-  .text-gradient-sunset {
-    @apply bg-clip-text text-transparent;
-    background-image: var(--gradient-sunset);
+  /* Grain texture — signals hand-crafted, not rendered */
+  .grain {
+    position: relative;
+  }
+  .grain::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 200px 200px;
+    z-index: 1;
   }
 
-  .bg-gradient-sunset {
-    background-image: var(--gradient-sunset);
+  /* Kenyan heritage stripe — subtle, editorial */
+  .kenyan-stripe {
+    position: relative;
+  }
+  .kenyan-stripe::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(
+      180deg,
+      hsl(var(--kenyan-black)) 0%,
+      hsl(var(--kenyan-black)) 30%,
+      hsl(var(--kenyan-red)) 30%,
+      hsl(var(--kenyan-red)) 55%,
+      hsl(var(--kenyan-green)) 55%,
+      hsl(var(--kenyan-green)) 100%
+    );
   }
 
-  .bg-gradient-savannah {
-    background-image: var(--gradient-savannah);
+  /* Functional press feedback — not cosmetic glow */
+  .press {
+    transition: transform 80ms ease;
+  }
+  .press:active {
+    transform: translateY(1px);
   }
 
-  .bg-gradient-hero {
-    background-image: var(--gradient-hero);
+  /* Maasai-inspired border pattern — refined */
+  .maasai-border {
+    border-image: repeating-linear-gradient(
+      90deg,
+      hsl(var(--kenyan-red)) 0px,
+      hsl(var(--kenyan-red)) 12px,
+      hsl(var(--kenyan-green)) 12px,
+      hsl(var(--kenyan-green)) 24px,
+      hsl(var(--kenyan-black)) 24px,
+      hsl(var(--kenyan-black)) 36px
+    ) 4;
+    border-bottom-width: 4px;
+    border-bottom-style: solid;
   }
-
-  .shadow-soft {
-    box-shadow: var(--shadow-soft);
-  }
-
-  .shadow-glow {
-    box-shadow: var(--shadow-glow);
-  }
-
-  .shadow-card {
-    box-shadow: var(--shadow-card);
-  }
-
-  .glass-card {
-    @apply backdrop-blur-xl border border-border/50;
-    background: var(--gradient-glass);
-  }
-
-  /* Maasai-inspired pattern */
-  .maasai-pattern {
-    background-image: 
-      repeating-linear-gradient(
-        0deg,
-        transparent,
-        transparent 8px,
-        hsl(var(--kenyan-red) / 0.1) 8px,
-        hsl(var(--kenyan-red) / 0.1) 10px
-      ),
-      repeating-linear-gradient(
-        90deg,
-        transparent,
-        transparent 8px,
-        hsl(var(--kenyan-green) / 0.1) 8px,
-        hsl(var(--kenyan-green) / 0.1) 10px
-      );
-  }
-
-  /* Animations */
-  @keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-  }
-
-  @keyframes pulse-glow {
-    0%, 100% { box-shadow: 0 0 20px hsl(var(--accent) / 0.3); }
-    50% { box-shadow: 0 0 40px hsl(var(--accent) / 0.5); }
-  }
-
-  @keyframes slide-up {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  @keyframes fade-in {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-
-  .animate-float {
-    animation: float 6s ease-in-out infinite;
-  }
-
-  .animate-pulse-glow {
-    animation: pulse-glow 2s ease-in-out infinite;
-  }
-
-  .animate-slide-up {
-    animation: slide-up 0.6s ease-out forwards;
-  }
-
-  .animate-fade-in {
-    animation: fade-in 0.5s ease-out forwards;
-  }
-
-  .animation-delay-100 { animation-delay: 100ms; }
-  .animation-delay-200 { animation-delay: 200ms; }
-  .animation-delay-300 { animation-delay: 300ms; }
-  .animation-delay-400 { animation-delay: 400ms; }
-  .animation-delay-500 { animation-delay: 500ms; }
 }
