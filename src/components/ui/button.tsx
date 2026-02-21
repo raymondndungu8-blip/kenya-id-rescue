@@ -9,13 +9,13 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "text-white shadow-soft hover:shadow-lg hover:-translate-y-0.5 [background:linear-gradient(90deg,#0A1F44,#0A1F44)] [background-size:200%_100%] hover:[background:linear-gradient(90deg,#0A1F44,#1ABC9C)] hover:[background-position:right_center] [transition:background-position_0.5s_ease,transform_0.3s_ease]",
+        default: "text-white shadow-soft hover:shadow-lg [background:linear-gradient(90deg,#0A1F44,#0A1F44)] [background-size:200%_100%] hover:[background:linear-gradient(90deg,#0A1F44,#1ABC9C)] hover:[background-position:right_center] [transition:background-position_0.5s_ease,box-shadow_0.3s_ease]",
         destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90",
         outline: "border-2 border-primary bg-transparent text-primary hover:bg-primary hover:text-primary-foreground",
         secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80 shadow-soft",
         ghost: "hover:bg-muted hover:text-foreground",
         link: "text-primary underline-offset-4 hover:underline",
-        hero: "bg-gradient-hero text-primary-foreground shadow-lg hover:shadow-xl hover:-translate-y-1 active:translate-y-0",
+        hero: "bg-gradient-hero text-primary-foreground shadow-lg hover:shadow-xl hover:brightness-110",
         accent: "bg-accent text-accent-foreground hover:bg-accent/90 shadow-glow",
         glass: "backdrop-blur-xl border-2 border-border/50 bg-card/80 text-foreground hover:bg-card",
         kenyan: "bg-secondary text-secondary-foreground hover:bg-secondary/90 shadow-soft",
