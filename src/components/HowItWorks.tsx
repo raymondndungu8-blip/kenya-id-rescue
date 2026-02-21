@@ -89,7 +89,7 @@ const HowItWorks = () => {
           <div className="inline-flex items-center gap-3 px-6 py-4 rounded-2xl bg-secondary/10 border border-secondary/20">
             <CheckCircle className="w-6 h-6 text-secondary" />
             <span className="text-foreground font-medium">
-              Over 12,000 IDs successfully returned to their owners
+              Join us in Changing over 50 Million Kenyan lives
             </span>
           </div>
         </div>
