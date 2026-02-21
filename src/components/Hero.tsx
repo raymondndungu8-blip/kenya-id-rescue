@@ -31,7 +31,7 @@ const Hero = () => {
       </div>
       
       {/* Elegant overlay for readability */}
-      <div className="absolute inset-0 bg-background/90 backdrop-blur-sm" />
+      <div className="absolute inset-0 bg-background/70 backdrop-blur-[2px]" />
       
       {/* Maasai Pattern */}
       <div className="absolute inset-0 maasai-pattern opacity-20" />

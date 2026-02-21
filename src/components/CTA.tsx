@@ -28,7 +28,7 @@ const CTA = () => {
       </div>
       
       {/* Elegant overlay for readability */}
-      <div className="absolute inset-0 bg-gradient-hero opacity-85" />
+      <div className="absolute inset-0 bg-gradient-hero opacity-65" />
       
       {/* Pattern Overlay */}
       <div className="absolute inset-0 maasai-pattern opacity-10" />
