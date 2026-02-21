@@ -91,7 +91,7 @@ const Features = () => {
       </div>
       
       {/* Elegant overlay for readability */}
-      <div className="absolute inset-0 bg-background/85 backdrop-blur-sm" />
+      <div className="absolute inset-0 bg-background/65 backdrop-blur-[2px]" />
       
       {/* Subtle Maasai pattern overlay */}
       <div className="absolute inset-0 maasai-pattern opacity-20" />
