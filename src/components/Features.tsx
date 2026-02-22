@@ -97,7 +97,7 @@ const Features = () => {
       <div className="absolute inset-0 maasai-pattern opacity-20" />
 
       <div className="container mx-auto px-4 relative z-10">
-        <div className="text-center mb-16">
+        <div className="text-center mb-16 scroll-animate">
           <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/20 text-accent-foreground text-sm font-semibold mb-4 backdrop-blur-sm">
             <Sparkles className="w-4 h-4 text-accent" />
             Powerful Features
@@ -111,11 +111,11 @@ const Features = () => {
           </p>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 scroll-stagger">
           {features.map((feature, index) => (
             <div 
               key={index} 
-              className="group p-6 rounded-2xl bg-card/95 backdrop-blur-sm border border-border/50 hover:border-primary/30 shadow-card hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+              className="group p-6 rounded-2xl bg-card/95 backdrop-blur-sm border border-border/50 hover:border-primary/30 shadow-card hover:shadow-lg transition-all duration-300 scroll-animate-scale"
             >
               {/* Badge */}
               <span className="inline-block px-2 py-1 rounded-md bg-muted text-muted-foreground text-xs font-medium mb-4">
