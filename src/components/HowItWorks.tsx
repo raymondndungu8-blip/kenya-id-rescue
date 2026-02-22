@@ -39,7 +39,7 @@ const HowItWorks = () => {
       <div className="absolute bottom-0 left-0 w-80 h-80 rounded-full bg-secondary/5 blur-3xl" />
 
       <div className="container mx-auto px-4 relative z-10">
-        <div className="text-center mb-16">
+        <div className="text-center mb-16 scroll-animate">
           <span className="inline-block px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-semibold mb-4">
             Simple Process
           </span>
@@ -51,10 +51,10 @@ const HowItWorks = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-4">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-4 scroll-stagger">
           {steps.map((step, index) => (
             <div key={index} className="relative group">
-              <div className="bg-card rounded-2xl p-6 h-full shadow-card hover:shadow-lg transition-all duration-300 border border-border/50 hover:-translate-y-1">
+              <div className="bg-card rounded-2xl p-6 h-full shadow-card hover:shadow-lg transition-all duration-300 border border-border/50 scroll-animate-scale">
                 {/* Step Number */}
                 <span className="absolute -top-3 -left-3 w-10 h-10 rounded-xl bg-foreground text-background flex items-center justify-center font-bold text-sm">
                   {step.step}
@@ -85,7 +85,7 @@ const HowItWorks = () => {
         </div>
 
         {/* Success Message */}
-        <div className="mt-16 text-center">
+        <div className="mt-16 text-center scroll-animate">
           <div className="inline-flex items-center gap-3 px-6 py-4 rounded-2xl bg-secondary/10 border border-secondary/20">
             <CheckCircle className="w-6 h-6 text-secondary" />
             <span className="text-foreground font-medium">

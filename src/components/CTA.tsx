@@ -38,7 +38,7 @@ const CTA = () => {
       <div className="absolute bottom-10 right-10 w-60 h-60 rounded-full bg-accent/20 blur-3xl" />
 
       <div className="container mx-auto px-4 relative z-10">
-        <div className="max-w-3xl mx-auto text-center text-primary-foreground">
+        <div className="max-w-3xl mx-auto text-center text-primary-foreground scroll-animate">
           {/* Emoji/Icon */}
           <div className="text-6xl mb-6">🇰🇪</div>
 

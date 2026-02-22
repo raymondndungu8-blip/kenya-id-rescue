@@ -50,7 +50,7 @@ const CollectionPoints = () => {
   return (
     <section id="collection-points" className="py-24 bg-background relative">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
+        <div className="text-center mb-16 scroll-animate">
           <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-semibold mb-4">
             <MapPin className="w-4 h-4" />
             Trusted Locations
@@ -65,11 +65,11 @@ const CollectionPoints = () => {
         </div>
 
         {/* Collection Types */}
-        <div className="grid md:grid-cols-3 gap-6 mb-12">
+        <div className="grid md:grid-cols-3 gap-6 mb-12 scroll-stagger">
           {collectionTypes.map((type, index) => (
             <div 
               key={index}
-              className="p-6 rounded-2xl bg-card border border-border/50 shadow-card hover:shadow-lg transition-all duration-300 hover:-translate-y-1 text-center"
+              className="p-6 rounded-2xl bg-card border border-border/50 shadow-card hover:shadow-lg transition-all duration-300 text-center scroll-animate-scale"
             >
               <div className="w-16 h-16 rounded-2xl bg-gradient-hero flex items-center justify-center mx-auto mb-4">
                 <type.icon className="w-8 h-8 text-primary-foreground" />
@@ -84,7 +84,7 @@ const CollectionPoints = () => {
         </div>
 
         {/* Map Preview & Nearby List */}
-        <div className="grid lg:grid-cols-5 gap-8">
+        <div className="grid lg:grid-cols-5 gap-8 scroll-animate">
           {/* Map Placeholder */}
           <div className="lg:col-span-3 rounded-2xl overflow-hidden bg-muted/50 border border-border/50 h-80 lg:h-auto relative">
             <div className="absolute inset-0 flex items-center justify-center">
